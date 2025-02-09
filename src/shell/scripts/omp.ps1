@@ -223,7 +223,7 @@ New-Module -Name "oh-my-posh-core" -ScriptBlock {
 
         $invocationInfo = try {
             # retrieve info of the most recent error
-            $global:Error[0] | Where-Object { $_ -ne $null } | Select-Object -ExpandProperty InvocationInfo
+            $global:Error | Where-Object { $_.GetType().Name -eq 'ErrorRecord' } | Select-Object -First 1 -ExpandProperty InvocationInfo
         }
         catch { $null }
 
@@ -278,9 +278,7 @@ New-Module -Name "oh-my-posh-core" -ScriptBlock {
 
         Set-PoshPromptType
 
-        if ($script:PromptType -ne 'transient') {
-            Update-PoshErrorCode
-        }
+        Update-PoshErrorCode
 
         Set-PoshContext $script:ErrorCode
 
