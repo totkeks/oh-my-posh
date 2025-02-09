@@ -209,7 +209,7 @@ New-Module -Name "oh-my-posh-core" -ScriptBlock {
         # error code should be updated only when a non-empty command is run
         if (($null -eq $lastHistory) -or ($script:LastHistoryId -eq $lastHistory.Id)) {
             $script:ExecutionTime = 0
-            $script:NoExitCode = $true
+            $script:ErrorCode = 0
             return
         }
 
